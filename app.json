@@ -1,0 +1,12 @@
+{
+  "name": "deeplink-react-navigation",
+  "displayName": "deeplink-react-navigation",
+  "expo": {
+    "name": "deeplink-react-navigation",
+    "slug": "deeplink-react-navigation",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
