@@ -6,7 +6,7 @@ export default function HomeScreen({ navigation }) {
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Button
         title="Go to Profile"
-        onPress={() => navigation.navigate("Profile")}
+        onPress={() => navigation.navigate("Profile", { id: 1 })}
       />
     </View>
   );
