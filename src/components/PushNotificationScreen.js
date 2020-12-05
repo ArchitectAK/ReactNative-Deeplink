@@ -70,7 +70,7 @@ const PushNotificationScreen = () => {
     });
   };
 
-  const sendLocalNotification = () => {
+  const sendProfilNotification = () => {
     PushNotificationIOS.presentLocalNotification({
       alertTitle: "Deep link to profile",
       alertBody: "demo://app/profile/234",
@@ -78,7 +78,7 @@ const PushNotificationScreen = () => {
     });
   };
 
-  const sendLocalNotificationWithSound = () => {
+  const sendSettingsNotificationWithSound = () => {
     PushNotificationIOS.addNotificationRequest({
       id: "notificationWithSound",
       title: "Notification Deep link",
@@ -92,7 +92,7 @@ const PushNotificationScreen = () => {
     PushNotificationIOS.addNotificationRequest({
       id: "test",
       title: "deep link",
-      subtitle: "it will open notifications",
+      subtitle: "Open notifications",
       body: "demo://app/notifications",
       category: "test",
       threadId: "thread-id",
@@ -102,12 +102,7 @@ const PushNotificationScreen = () => {
   };
 
   const onRegistered = (deviceToken) => {
-    Alert.alert("Registered For Remote Push", `Device Token: ${deviceToken}`, [
-      {
-        text: "Dismiss",
-        onPress: null,
-      },
-    ]);
+    console, log("Registered For Remote Push", `Device Token: ${deviceToken}`);
   };
 
   const onRegistrationError = (error) => {
@@ -134,15 +129,15 @@ const PushNotificationScreen = () => {
     <View style={styles.container}>
       <Button
         onPress={scheduleLocalNotification}
-        label="Schedule local notification without deep link"
+        label="Schedule notification without deep link"
       />
       <Button
-        onPress={sendLocalNotification}
-        label="Send local notification deeplink to profile"
+        onPress={sendProfilNotification}
+        label="Send notification deeplink to profile"
       />
       <Button
-        onPress={sendLocalNotificationWithSound}
-        label="Send local notification deeplink to setting"
+        onPress={sendSettingsNotificationWithSound}
+        label="Send notification deeplink to setting"
       />
       <Button
         onPress={addNotificationRequest}
