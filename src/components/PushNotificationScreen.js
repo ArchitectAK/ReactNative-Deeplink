@@ -40,11 +40,11 @@ const PushNotificationScreen = () => {
       "registrationError",
       onRegistrationError
     );
-    PushNotificationIOS.addEventListener("notification", onRemoteNotification);
     PushNotificationIOS.addEventListener(
       "localNotification",
       onLocalNotification
     );
+    PushNotificationIOS.addEventListener("notification", onRemoteNotification);
 
     PushNotificationIOS.requestPermissions().then(
       (data) => {
@@ -62,6 +62,13 @@ const PushNotificationScreen = () => {
       PushNotificationIOS.removeEventListener("localNotification");
     };
   }, []);
+
+  const scheduleLocalNotification = () => {
+    PushNotificationIOS.scheduleLocalNotification({
+      alertBody: "Scheduled Local Notification",
+      fireDate: new Date(new Date().valueOf() + 2000).toISOString(),
+    });
+  };
 
   const sendLocalNotification = () => {
     PushNotificationIOS.presentLocalNotification({
@@ -81,14 +88,6 @@ const PushNotificationScreen = () => {
       badge: 1,
     });
   };
-
-  const scheduleLocalNotification = () => {
-    PushNotificationIOS.scheduleLocalNotification({
-      alertBody: "Scheduled Local Notification",
-      fireDate: new Date(new Date().valueOf() + 2000).toISOString(),
-    });
-  };
-
   const addNotificationRequest = () => {
     PushNotificationIOS.addNotificationRequest({
       id: "test",
@@ -117,32 +116,7 @@ const PushNotificationScreen = () => {
 
   const onRemoteNotification = (notification) => {
     const isClicked = notification.getData().userInteraction === 1;
-
-    const result = `
-        Title:  ${notification.getTitle()};\n
-        Subtitle:  ${notification.getSubtitle()};\n
-        Message: ${notification.getMessage()};\n
-        badge: ${notification.getBadgeCount()};\n
-        sound: ${notification.getSound()};\n
-        category: ${notification.getCategory()};\n
-        content-available: ${notification.getContentAvailable()};\n
-        Notification is clicked: ${String(isClicked)}.`;
-
-    if (notification.getTitle() == undefined) {
-      Alert.alert("Silent push notification Received", result, [
-        {
-          text: "Send local push",
-          onPress: sendLocalNotification,
-        },
-      ]);
-    } else {
-      Alert.alert("Push Notification Received", result, [
-        {
-          text: "Dismiss",
-          onPress: null,
-        },
-      ]);
-    }
+    // Linking.openURL(notification.getMessage());
   };
 
   const onLocalNotification = (notification) => {
@@ -159,16 +133,16 @@ const PushNotificationScreen = () => {
   return (
     <View style={styles.container}>
       <Button
+        onPress={scheduleLocalNotification}
+        label="Schedule local notification without deep link"
+      />
+      <Button
         onPress={sendLocalNotification}
         label="Send local notification deeplink to profile"
       />
       <Button
         onPress={sendLocalNotificationWithSound}
         label="Send local notification deeplink to setting"
-      />
-      <Button
-        onPress={scheduleLocalNotification}
-        label="Schedule local notification without deep link"
       />
       <Button
         onPress={addNotificationRequest}
