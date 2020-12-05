@@ -2,7 +2,7 @@
 
 
 
-### How to deep link app content from notification in react native
+### Deep linking in React Native with React Navigation v5
 - [Code](https://github.com/AnkitDroidGit/ReactNative-Deeplink/tree/react-navigation-deeplink)
 - [YouTube Tutorial](https://www.youtube.com/watch?v=s8YaclRknYw)
 
