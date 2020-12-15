@@ -102,7 +102,7 @@ const PushNotificationScreen = () => {
   };
 
   const onRegistered = (deviceToken) => {
-    console, log("Registered For Remote Push", `Device Token: ${deviceToken}`);
+    console.log("Registered For Remote Push", `Device Token: ${deviceToken}`);
   };
 
   const onRegistrationError = (error) => {
